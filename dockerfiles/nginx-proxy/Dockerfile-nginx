@@ -1,0 +1,20 @@
+from nginx:mainline
+
+env DEBIAN_FRONTEND noninteractive
+env LC_ALL C.UTF-8
+env LANG en_US.UTF-8
+env LANGUAGE en_US.UTF-8
+
+run apt-get update
+run apt-get -y -qq install ca-certificates openssl letsencrypt
+
+add default.conf .
+add nginx.conf .
+add entrypoint.sh .
+run chmod +x entrypoint.sh
+
+run apt-get clean
+run rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apt*
+
+entrypoint ["./entrypoint.sh"]
+cmd ["nginx", "-g", "daemon off;"]

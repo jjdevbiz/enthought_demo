@@ -1,0 +1,13 @@
+HOSTNAME=hodly.group
+VHOSTNAME=sourcegraph.${HOSTNAME}
+ADMIN_EMAIL=admin@daftcloud.com
+base_dockerfile=Dockerfile-nginx
+org_name=enthought
+app_name=nginx
+container_ver=1.0.0.0
+build_remote_host=build.${HOSTNAME}
+registry=registry.${HOSTNAME}
+BACKEND_HOST=127.0.0.1
+BACKEND_PORT=7080
+BACKEND_PORT_ADMIN=2633
+base_container="${registry}/${org_name}/${app_name}:${container_ver}"
