@@ -7,7 +7,7 @@ source ../makerc
 
 # nginx-proxy
 cd ../dockerfiles/nginx-proxy
-make build-nginx push-nginx
+make build-nginx # push-nginx
 
 # sourcegraph
 sourcegraph_container=sourcegraph/server:3.0.1

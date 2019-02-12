@@ -3,5 +3,5 @@ resource "aws_route53_record" "sourcegraph" {
   name    = "sourcegraph.hodly.group"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.web.private_ip}"]
+  records = ["${aws_instance.web.public_ip}"]
 }

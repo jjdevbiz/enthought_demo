@@ -22,15 +22,22 @@ resource "aws_instance" "web" {
   #delete_on_termination = "true"
   #volume_size   = "20"
   #volume_type   = "standard"
+  key_name      = "default"
+  associate_public_ip_address = "true"
   monitoring    = "true"
-  subnet_id     = "us-east-1a"
+  #subnet_id     = "us-east-1a"
+  subnet_id     = "subnet-058be759"
   user_data = "${file("userdata/sourcegraph.sh")}"
 
-  # I can get an env key onto the instance with remote-exec:
-  provisioner "remote-exec" {
-    inline = [
-      "echo ${var.secretHash} > /secretHash"
-    ]
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    }
+
+  # I can get an env key onto the instance with local-exec:
+  provisioner "file" {
+    content     = "${var.secretHash}"
+    destination = "/tmp/secretHash.txt"
   }
 
   tags = {

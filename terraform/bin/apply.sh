@@ -10,8 +10,8 @@ md5sig="`ssh-keygen -E md5 -lf ${demo_admin_key} | awk '{print $2}' | sed -e 's/
 terraform apply \
   -var "aws_access_key=${AWS_DEMO_KEY}" \
   -var "aws_secret_key=${AWS_DEMO_SECRET}" \
-  -var "pub_key=${demo_admin_key}" \
-  -var "pvt_key=${demo_admin_key}" \
+  -var "pub_key=${demo_admin_pubkey}" \
+  -var "pvt_key=${demo_admin_privkey}" \
   -var "rds_username=$rds_username" \
   -var "rds_password=$rds_password" \
   -var "ssh_fingerprint=$SSH_FINGERPRINT" \

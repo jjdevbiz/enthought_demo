@@ -6,7 +6,7 @@ cd $DIR
 source ../makerc
 
 # nginx-proxy
-docker run --restart -dit \
+docker run --restart=unless-stopped -dit \
 	-p 80:80 \
 	-p 443:443 \
 	--net=host \
@@ -21,7 +21,7 @@ docker run --restart -dit \
 	${base_container}
 
 # sourcegraph
-docker run --restart -dit \
+docker run --restart=unless-stopped -dit \
 	-p 127.0.0.1:7080:7080 \
 	-p 127.0.0.1:2633:2633 \
 	--net=host \

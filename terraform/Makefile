@@ -5,7 +5,7 @@ plan:
 	./bin/plan.sh
 
 apply:
-	./bin/apply
+	./bin/apply.sh
 
 refresh:
 	./bin/refresh.sh
