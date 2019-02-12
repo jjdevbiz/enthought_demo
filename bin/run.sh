@@ -24,7 +24,7 @@ docker run --restart=unless-stopped -dit \
 # sourcegraph
 docker run --restart=unless-stopped -dit \
 	-p 127.0.0.1:7080:7080 \
-	-p 127.0.0.1:2633:2633 \
+	-p 2633:2633 \
 	--net=host \
 	-v ${sourcegraph_config}:/etc/sourcegraph \
 	-v ${sourcegraph_data}:/var/opt/sourcegraph \
