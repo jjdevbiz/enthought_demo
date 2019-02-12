@@ -20,7 +20,7 @@ mkdir -p /etc/nginx/conf.d
 
 [ "${ADMIN_EMAIL}" ] || EMAIL=jj@daftcloud.com
 
-[ "${LETSENCRYPT}" == "1" ] && [ ! -f "${ssl_certificate}" ] && letsencrypt certonly -n --standalone --agree-tos --email $EMAIL -d ${VHOSTNAME}
+[ "${LETSENCRYPT}" == "1" ] && [ ! -f "${ssl_certificate}" ] && letsencrypt certonly --standalone -n --agree-tos --email $EMAIL -d ${VHOSTNAME}
 
 [ -d "${ssl_dhparam_dir}" ] || mkdir -p /etc/nginx/ssl
 [ -f "${ssl_dhparam}" ] || openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048 && chmod 700 ${ssl_dhparam_dir} && chmod 600 ${ssl_dhparam}
