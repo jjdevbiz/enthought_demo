@@ -2,6 +2,7 @@ HOSTNAME=hodly.group
 VHOSTNAME=sourcegraph.${HOSTNAME}
 ADMIN_EMAIL=admin@daftcloud.com
 APPUSER=appuser
+LETSENCRYPT=1
 base_dockerfile=Dockerfile-nginx
 org_name=enthought
 app_name=nginx
