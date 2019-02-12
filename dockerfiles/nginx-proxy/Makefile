@@ -9,5 +9,5 @@ build-nginx:
 push-nginx:
 	docker push ${base_container}
 
-run-nginx:
-	./bin/run.sh
+# run-nginx:
+# 	./bin/run.sh
