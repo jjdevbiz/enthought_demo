@@ -16,4 +16,5 @@ terraform plan \
   -var "rds_password=$rds_password" \
   -var "ssh_fingerprint=${md5sig}" \
   -var "hosted_zone_id=$hosted_zone_id" \
+  -var "secretHash=$secretHash" \
   -out="terraform.tfplan"

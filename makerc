@@ -7,9 +7,12 @@ org_name=enthought
 app_name=nginx
 container_ver=1.0.0.0
 build_remote_host=build.${HOSTNAME}
-registry=registry.${HOSTNAME}
+registry=717279510189.dkr.ecr.us-east-1.amazonaws.com
 # 717279510189.dkr.ecr.us-east-1.amazonaws.com/enthought/demo
 BACKEND_HOST=127.0.0.1
 BACKEND_PORT=7080
 BACKEND_PORT_ADMIN=2633
-base_container="${registry}/${org_name}/${app_name}:${container_ver}"
+base_container="${registry}/${app_name}:${container_ver}"
+sourcegraph_container=sourcegraph/server:3.0.1
+sourcegraph_config=/data/sourcegraph/config
+sourcegraph_data=/data/sourcegraph/data

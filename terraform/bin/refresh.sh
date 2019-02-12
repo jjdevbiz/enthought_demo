@@ -15,4 +15,5 @@ terraform refresh \
   -var "rds_username=$rds_username" \
   -var "rds_password=$rds_password" \
   -var "hosted_zone_id=$hosted_zone_id" \
+  -var "secretHash=$secretHash" \
   -var "ssh_fingerprint=$SSH_FINGERPRINT"

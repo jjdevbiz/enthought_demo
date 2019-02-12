@@ -1,4 +1,4 @@
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "sourcegraph" {
   zone_id = "${var.hosted_zone_id}"
   name    = "sourcegraph.hodly.group"
   type    = "A"

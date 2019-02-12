@@ -16,4 +16,5 @@ terraform apply \
   -var "rds_password=$rds_password" \
   -var "ssh_fingerprint=$SSH_FINGERPRINT" \
   -var "hosted_zone_id=$hosted_zone_id" \
+  -var "secretHash=$secretHash" \
   -auto-approve

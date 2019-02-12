@@ -12,5 +12,3 @@ make build-nginx push-nginx
 # sourcegraph
 sourcegraph_container=sourcegraph/server:3.0.1
 docker pull $sourcegraph_container
-docker tag $sourcegraph_container
-docker push ${registry}/$sourcegraph_container

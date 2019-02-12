@@ -6,6 +6,7 @@ variable "ssh_fingerprint" {}
 variable "rds_username" {}
 variable "rds_password" {}
 variable "hosted_zone_id" {}
+variable "secretHash" {}
 
 # Configure the AWS Provider
 provider "aws" {

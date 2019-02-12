@@ -1,5 +1,5 @@
 SHELL=bash
-include makerc
+include ../../makerc
 
 all: build-nginx push-nginx
 

@@ -26,6 +26,13 @@ resource "aws_instance" "web" {
   subnet_id     = "us-east-1a"
   user_data = "${file("userdata/sourcegraph.sh")}"
 
+  # I can get an env key onto the instance with remote-exec:
+  provisioner "remote-exec" {
+    inline = [
+      "echo ${var.secretHash} > /secretHash"
+    ]
+  }
+
   tags = {
     Name = "sourcegraph"
   }
