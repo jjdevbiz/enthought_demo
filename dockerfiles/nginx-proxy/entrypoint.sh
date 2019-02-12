@@ -32,8 +32,8 @@ cp /default.conf $nginx_vhost
 # cp /.htpasswd $nginx_htpasswd
 
 sed -i "s/BACKEND_HOST/${BACKEND_HOST}/g" $nginx_conf
-sed -i "s/BACKEND_PORT/${BACKEND_PORT}/g" $nginx_conf
 sed -i "s/BACKEND_PORT_ADMIN/${BACKEND_PORT_ADMIN}/g" $nginx_conf
+sed -i "s/BACKEND_PORT/${BACKEND_PORT}/g" $nginx_conf
 
 # VHOSTNAME # default.conf
 sed -i "s/VHOSTNAME/${VHOSTNAME}/g" $nginx_vhost
