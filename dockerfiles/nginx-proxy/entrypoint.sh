@@ -18,7 +18,7 @@ mkdir -p /etc/nginx/conf.d
 [ "${BACKEND_HOST}" ] || BACKEND_HOST=127.0.0.1
 [ "${BACKEND_PORT_ADMIN}" ] || BACKEND_PORT_ADMIN=2633
 
-EMAIL=$ADMIN_EMAIL
+[ "${ADMIN_EMAIL}" ] || EMAIL=jj@daftcloud.com
 
 [ "${LETSENCRYPT}" == "1" ] && [ ! -f "${ssl_certificate}" ] && letsencrypt certonly --standalone --agree-tos --email $EMAIL -d ${VHOSTNAME}
 

@@ -10,6 +10,7 @@ docker run --restart=unless-stopped -dit \
 	-p 80:80 \
 	-p 443:443 \
 	--net=host \
+	-e ADMIN_EMAIL=$ADMIN_EMAIL \
 	-e LETSENCRYPT=$LETSENCRYPT \
 	-e BACKEND_HOST=${BACKEND_HOST} \
 	-e BACKEND_PORT=${BACKEND_PORT} \
