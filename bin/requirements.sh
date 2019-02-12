@@ -5,26 +5,32 @@ cd $DIR
 
 source ../makerc
 
-apt-get update -qq
-apt-get install -y -qq make wget curl git
-apt-get remove -y -qq docker.io
+sudo apt-get update -qq
+sudo apt-get install -y -qq make wget curl git
+sudo apt-get remove -y -qq docker.io
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/
-apt-get install -y -qq apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-apt-key fingerprint 0EBFCD88
-add-apt-repository \
+sudo apt-get install -y -qq apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
-apt-get update -qq
-apt-get -y -qq install docker-ce docker-ce-cli containerd.io
+sudo apt-get update -qq
+sudo apt-get -y -qq install docker-ce docker-ce-cli containerd.io
 
-# /etc/init.d/nginx-proxy
-# /etc/init.d/sourcegraph-3.0
+sudo mkdir -p /etc/letsencrypt
+sudo mkdir -p /etc/nginx/conf.d
+sudo mkdir -p /etc/nginx/ssl
+sudo mkdir -p /var/log/nginx
 
-useradd -m -d /home/$APPUSER -s /bin/bash $APPUSER
-usermod -aG docker $APPUSER
-# git clone to $APPUSER
+sudo mkdir -p $sourcegraph_config
+sudo mkdir -p $sourcegraph_data
 
-service docker restart
+sudo useradd -m -d /home/$APPUSER -s /bin/bash $APPUSER
+sudo usermod -aG docker $APPUSER
+sudo usermod -aG docker ubuntu
+# su -c "git clone $git_demo" $APPUSER
+
+sudo service docker restart
 
 # s3cmd backups of /data (sourcegraph data), load previous backup if it doesn't exist

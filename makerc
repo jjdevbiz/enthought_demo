@@ -16,3 +16,4 @@ base_container="${registry}/${app_name}:${container_ver}"
 sourcegraph_container=sourcegraph/server:3.0.1
 sourcegraph_config=/data/sourcegraph/config
 sourcegraph_data=/data/sourcegraph/data
+git_demo="https://github.com/jjdevbiz/enthought_demo.git"

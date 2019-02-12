@@ -6,11 +6,6 @@ cd $DIR
 source ../makerc
 
 # nginx-proxy
-mkdir -p /etc/letsencrypt
-mkdir -p /etc/nginx/conf.d
-mkdir -p /etc/nginx/ssl
-mkdir -p /var/log/nginx
-
 docker run --restart -dit \
 	-p 80:80 \
 	-p 443:443 \
@@ -26,8 +21,6 @@ docker run --restart -dit \
 	${base_container}
 
 # sourcegraph
-mkdir -p $sourcegraph_config
-mkdir -p $sourcegraph_data
 docker run --restart -dit \
 	-p 127.0.0.1:7080:7080 \
 	-p 127.0.0.1:2633:2633 \
