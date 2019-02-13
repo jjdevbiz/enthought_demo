@@ -1,5 +1,8 @@
 #!/bin/bash
 
+dotenv=/tmp/dotenv
+[ -f "$dotenv" ] && source $dotenv
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd $DIR
 
@@ -26,6 +29,12 @@ docker run --restart=unless-stopped -dit \
 	-p 127.0.0.1:7080:7080 \
 	-p 2633:2633 \
 	--net=host \
+	-e PGHOST=${PGHOST} \
+	-e PGUSER=${PGUSER} \
+	-e PGPASSWORD=${PGPASSWORD} \
+	-e PGDATABASE=${PGDATABASE} \
+	-e PGSSLMODE=${PGSSLMODE} \
+	-e REDIS_ENDPOINT=${REDIS_ENDPOINT} \
 	-v ${sourcegraph_config}:/etc/sourcegraph \
 	-v ${sourcegraph_data}:/var/opt/sourcegraph \
 	${sourcegraph_container}

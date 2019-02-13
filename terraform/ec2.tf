@@ -27,7 +27,6 @@ resource "aws_instance" "web" {
   monitoring    = "true"
   #subnet_id     = "us-east-1a"
   subnet_id     = "subnet-058be759"
-  user_data = "${file("userdata/sourcegraph.sh")}"
 
   connection {
     type        = "ssh"
@@ -39,6 +38,14 @@ resource "aws_instance" "web" {
     content     = "${var.secretHash}"
     destination = "/tmp/secretHash.txt"
   }
+
+  provisioner "file" {
+    content     = "PGHOST=${aws_rds_cluster.postgresql.endpoint} PGUSER=${aws_rds_cluster.postgresql.master_username} PGPASSWORD=${aws_rds_cluster.postgresql.master_password} PGDATABASE=${aws_rds_cluster.postgresql.database_name} PGSSLMODE=false REDIS_ENDPOINT=${aws_elasticache_cluster.redis.cluster_address}:${aws_elasticache_cluster.redis.port}"
+    destination = "/tmp/dotenv"
+  }
+
+
+  user_data = "${file("userdata/sourcegraph.sh")}"
 
   tags = {
     Name = "sourcegraph"
