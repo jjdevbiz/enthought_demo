@@ -1,5 +1,3 @@
-# Ubuntu Server 18.04 LTS (HVM), SSD Volume Type - ami-0f65671a86f061fcd (64-bit x86)
-
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -19,14 +17,11 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.large"
-  #delete_on_termination = "true"
-  #volume_size   = "20"
-  #volume_type   = "standard"
   key_name      = "default"
   associate_public_ip_address = "true"
   monitoring    = "true"
-  #subnet_id     = "us-east-1a"
-  subnet_id     = "subnet-058be759"
+  security_groups = ["${aws_security_group.ec2.id}","${aws_security_group.sourcegraph-mgmt.id}"]
+  subnet_id     = "${var.defaultSubnet}"
 
   connection {
     type        = "ssh"
@@ -40,14 +35,60 @@ resource "aws_instance" "web" {
   }
 
   provisioner "file" {
-    content     = "PGHOST=${aws_rds_cluster.postgresql.endpoint} PGUSER=${aws_rds_cluster.postgresql.master_username} PGPASSWORD=${aws_rds_cluster.postgresql.master_password} PGDATABASE=${aws_rds_cluster.postgresql.database_name} PGSSLMODE=false REDIS_ENDPOINT=${aws_elasticache_cluster.redis.cluster_address}:${aws_elasticache_cluster.redis.port}"
+# aws_elasticache_cluster.redis.cache_nodes.0.address
+    content     = "PGHOST=${aws_rds_cluster.postgresql.endpoint} PGUSER=${aws_rds_cluster.postgresql.master_username} PGPASSWORD=${aws_rds_cluster.postgresql.master_password} PGDATABASE=${aws_rds_cluster.postgresql.database_name} PGSSLMODE=disable REDIS_ENDPOINT=${aws_elasticache_cluster.redis.cache_nodes.0.address}:${aws_elasticache_cluster.redis.port}"
     destination = "/tmp/dotenv"
   }
-
 
   user_data = "${file("userdata/sourcegraph.sh")}"
 
   tags = {
     Name = "sourcegraph"
+  }
+}
+
+resource "aws_security_group" "ec2" {
+  name = "ec2"
+  description = "ec2 general servers"
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "sourcegraph-mgmt" {
+  name = "sourcegraph-mgmt"
+  description = "ec2 general servers"
+  ingress {
+    from_port = 2633
+    to_port = 2633
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }

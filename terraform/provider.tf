@@ -7,6 +7,7 @@ variable "rds_username" {}
 variable "rds_password" {}
 variable "hosted_zone_id" {}
 variable "secretHash" {}
+variable "defaultSubnet" {}
 
 # Configure the AWS Provider
 provider "aws" {

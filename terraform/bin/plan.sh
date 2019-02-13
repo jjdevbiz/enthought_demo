@@ -17,4 +17,5 @@ terraform plan \
   -var "ssh_fingerprint=${md5sig}" \
   -var "hosted_zone_id=$hosted_zone_id" \
   -var "secretHash=$secretHash" \
+  -var "defaultSubnet=$defaultSubnet" \
   -out="terraform.tfplan"

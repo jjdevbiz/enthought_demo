@@ -16,6 +16,7 @@ terraform destroy -force \
   -var "rds_password=$rds_password" \
   -var "hosted_zone_id=$hosted_zone_id" \
   -var "secretHash=$secretHash" \
+  -var "defaultSubnet=$defaultSubnet" \
   -var "ssh_fingerprint=$SSH_FINGERPRINT"
 
 # terraform apply terraform.tfplan
