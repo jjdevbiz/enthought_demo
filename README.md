@@ -20,9 +20,11 @@ done
 
 > dockerfiles/nginx-proxy/default.conf
 
+* External monitoring is available via an https://uptimerobot.com account @5min intervals which check for http status 200 as well as SSL Server Certificate verification. 
+
 ## Launch
 
-The entire build process is automated upon instance launch after applying terraform state via the terraform/ec2.tf userdata script (terraform/userdata/sourcegraph.sh) and inline file placement on the instance (/tmp/dotenv) including installing the most recent version of docker, building the Nginx container, pulling the sourcegraph:3.0 container, daemonizing the processes (which restart upon failuture and at boot) with docker run --restart=unless-stopped flag, and installing letsencrypt TLS certificates inside the Nginx container (dockerfiles/nginx-proxy/entrypoint.sh). Terraform handles applying route53 DNS A record to the ec2 instance public IP assigned at launch, applying security groups for ports 22 (ssh), 80 (web), 443 (ssl/tls web), 5432 (postgresql), 6379 (redis), 2633 (sourcegraph-mgmt) within the default VPC. All administration is handled via Makefile. All runtime and build variables are sourced from dotenv.
+The entire build process is automated upon instance launch after applying terraform state via the terraform/ec2.tf userdata script (terraform/userdata/sourcegraph.sh) and inline file placement on the instance (/tmp/dotenv) including installing the most recent version of docker, building the Nginx container, pulling the sourcegraph:3.0 container, daemonizing the processes (which restart upon failure or reboot) with docker run --restart=unless-stopped flag, and installing letsencrypt TLS certificates inside the Nginx container (dockerfiles/nginx-proxy/entrypoint.sh). Terraform handles applying route53 DNS A record to the ec2 instance public IP assigned at launch, applying security groups for ports 22 (ssh), 80 (web), 443 (ssl/tls web), 5432 (postgresql), 6379 (redis), 2633 (sourcegraph-mgmt) within the default VPC. All administration is handled via Makefile. All runtime and build variables are sourced from dotenv.
 
 Note: Manual account steps included directing my dummy domain (hodly.group) Nameservers to AWS NS anchor and creating the zone_id within the route53 management console (stored in dotenv). I was not given a domain for use with this assignment but I have several spares so no worries :)
 
