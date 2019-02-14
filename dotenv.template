@@ -1,0 +1,12 @@
+aws_default_region=
+demo_admin_key=
+demo_admin_privkey=
+demo_admin_pubkey=
+AWS_DEMO_KEY=
+AWS_DEMO_SECRET=
+rds_username=
+rds_password=
+hosted_zone_id=
+secretHash=
+dummy_domain=
+defaultSubnet=
