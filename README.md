@@ -20,6 +20,8 @@ done
 
 > dockerfiles/nginx-proxy/default.conf
 
+* The ec2 instance can be ephemerally destroyed with no data loss and restored from RDS backups which are maintained for 2 days. All state in the sourcegraph application can be maintained in external database (as of ver ~3.0, source: https://about.sourcegraph.com/blog/sourcegraph-3.0).
+
 * External monitoring is available via an https://uptimerobot.com account @5min intervals which check for http status 200 as well as SSL Server Certificate verification. 
 
 ## Launch
