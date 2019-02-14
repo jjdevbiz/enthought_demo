@@ -4,7 +4,7 @@
 
 ## Description:
 
-This demo builds an ec2 instance of Sourcegraph (https://sourcegraph.com/welcome) which will use external postgresql (RDS) and redis (elasticache) behind a custom Nginx web server (Docker container) making use of perfect forward secrecy and LetsEncrypt SSL for an A grade from SSLLabs (https://www.ssllabs.com/ssltest/analyze.html?d=sourcegraph.hodly.group). The RDS instance utilizes an encrypted volume.
+This demo builds an ec2 instance of Sourcegraph (https://sourcegraph.com/welcome) which will use external postgresql (RDS) and redis (elasticache) behind a custom Nginx web server (Docker container) making use of perfect forward secrecy and LetsEncrypt SSL for an A grade from SSLLabs (https://www.ssllabs.com/ssltest/analyze.html?d=sourcegraph.hodly.group). The RDS instance utilizes an encrypted volume. Route53 is handling DNS for the instance using a spare domain I had on hand. The entire launch and downstream build process is administered using terraform.
 
 The Sourcegraph instance contains all of Enthoughts public repositories (135 total) retrieved via GitHub api (https://developer.github.com/v3/repos/#list-user-repositories) with curl:
 
